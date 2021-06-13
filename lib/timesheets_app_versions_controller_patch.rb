@@ -5,7 +5,7 @@ module TimesheetsAppVersionsControllerPatch
     base.instance_eval do
       unloadable
 
-      before_filter :set_safe_attr
+      before_action :set_safe_attr
 
     end
 
