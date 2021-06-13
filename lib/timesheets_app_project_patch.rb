@@ -6,11 +6,17 @@ module TimesheetsAppProjectPatch
     base.instance_eval do
       unloadable
 
-      alias_method_chain :rolled_up_versions, :timelogs
-      alias_method_chain :shared_versions, :timelogs
+      alias_method :rolled_up_versions_without_timelogs, :rolled_up_versions
+      alias_method :rolled_up_versions, :rolled_up_versions_with_timelogs
+      
+      alias_method :shared_versions_without_timelogs, :shared_versions
+      alias_method :shared_versions, :shared_versions_with_timelogs
 
       class << self
-        alias_method_chain :allowed_to_condition, :timelogs
+        
+        alias_method :allowed_to_condition_without_timelogs, :allowed_to_condition
+        alias_method :allowed_to_condition, :allowed_to_condition_with_timelogs
+        
       end
 
     end
