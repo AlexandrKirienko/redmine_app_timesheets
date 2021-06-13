@@ -4,9 +4,12 @@ module TimesheetsAppIssuePatch
     base.send(:include, InstanceMethods)
     base.instance_eval do
       unloadable
-
-      alias_method_chain :assignable_versions, :timelogs
-      alias_method_chain :validate_issue, :timelogs
+      
+      alias_method :assignable_versions_without_timelogs, :assignable_versions
+      alias_method :assignable_versions, :assignable_versions_with_timelogs
+      
+      alias_method :validate_issue_without_timelogs, :validate_issue
+      alias_method :validate_issue, :validate_issue_with_timelogs
     end
 
   end
