@@ -6,7 +6,9 @@ module TimesheetsAppCustomFieldPatch
       unloadable
       before_destroy :prevent_destroy
 
-      alias_method_chain :validate_custom_field, :timelogs
+      alias_method :validate_custom_field_without_timelogs, :validate_custom_field
+      alias_method :validate_custom_field, :validate_custom_field_with_timelogs
+            
     end
 
   end
