@@ -4,9 +4,13 @@ module TimesheetsAppTimeReportPatch
     base.send(:include, InstanceMethods)
     base.instance_eval do
       unloadable
-
-      alias_method_chain :run, :timelogs
-      alias_method_chain :load_available_criteria, :timelogs
+      
+      alias_method :run_without_timelogs, :run
+      alias_method :run, :run_with_timelogs
+      
+      alias_method :load_available_criteria_without_timelogs, :load_available_criteria
+      alias_method :load_available_criteria, :load_available_criteria_with_timelogs
+            
     end
 
   end
